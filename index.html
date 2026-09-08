@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Agent Route PWA</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="icon.png">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <!-- CSS Custom -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Containerul principal pentru Hartă -->
+    <div id="map"></div>
+
+    <!-- Meniu Superior (Zile / Categorii / Rapoarte) -->
+    <header class="top-bar">
+        <select id="day-selector">
+            <option value="luni">Luni</option>
+            <option value="marti">Marți</option>
+            <!-- Adaugă restul zilelor -->
+        </select>
+        <button id="lock-pins-btn" class="action-btn">🔒</button>
+        <button id="report-btn" class="action-btn">Raport</button>
+    </header>
+
+    <!-- Quick-View Magazin (Panou Flotant Minimalist) -->
+    <div id="quick-view" class="hidden">
+        <h3 id="qv-title">Nume Magazin</h3>
+        <p id="qv-status">Status: Neînceput</p>
+        <textarea id="qv-notes" placeholder="Adaugă notițe (salvate automat)..."></textarea>
+        <div class="qv-actions">
+            <button id="qv-waze-btn" class="btn primary">Waze</button>
+            <button id="qv-resolve-btn" class="btn success">Rezolvat</button>
+            <button id="qv-reset-btn" class="btn danger">Reset Pin</button>
+        </div>
+    </div>
+
+    <!-- Floating Action Button (FAB) pentru Produse/Poze -->
+    <button id="fab-btn">📝</button>
+
+    <!-- Fereastra tip "Messenger" pentru Audit -->
+    <div id="audit-modal" class="hidden">
+        <div class="modal-header">
+            <h4>Audit Magazin</h4>
+            <button id="close-audit-btn">X</button>
+        </div>
+        <div class="modal-body">
+            <input type="text" placeholder="Nume Produs">
+            <input type="number" placeholder="Preț">
+            <input type="file" accept="image/*" capture="environment" id="camera-input">
+            <button class="btn primary">Salvează & Comprimă Poza</button>
+        </div>
+    </div>
+
+    <!-- Firebase SDK (v9 compat - Ușor de integrat în Vanilla) -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <!-- Logica Aplicației -->
+    <script src="firebase-sync.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

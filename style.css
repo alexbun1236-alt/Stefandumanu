@@ -1,0 +1,161 @@
+:root {
+    --bg-color: #f8f9fa;
+    --primary: #007bff;
+    --success: #28a745;
+    --danger: #dc3545;
+    --text: #333;
+    --border: #ccc;
+    --radius: 12px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent; /* Elimină flash-ul albastru la tap pe iPhone */
+}
+
+body, html {
+    width: 100%;
+    height: 100dvh; /* Dynamic viewport pentru iOS Safari - PREVINE BUGS DE SCROLL */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    overflow: hidden; /* Fără scroll pe body */
+    background: var(--bg-color);
+}
+
+/* --- Harta --- */
+#map {
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Baza */
+}
+
+.crosshair-cursor {
+    cursor: crosshair !important; /* Pentru Ctrl+Drag pe PC */
+}
+
+/* --- UI Overlays (Mobile First) --- */
+.top-bar {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    z-index: 1000;
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.top-bar select, .action-btn {
+    padding: 10px 15px;
+    border-radius: var(--radius);
+    border: none;
+    background: white;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* --- Quick View (Minimalist Bottom Sheet) --- */
+#quick-view {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 400px;
+    background: white;
+    padding: 20px;
+    border-radius: var(--radius);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    z-index: 1000;
+    transition: bottom 0.3s ease;
+}
+
+#quick-view.hidden {
+    bottom: -100%; /* Ascunde în jos */
+}
+
+#qv-notes {
+    width: 100%;
+    height: 60px;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    resize: none;
+    font-family: inherit;
+}
+
+.qv-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+.btn.primary { background: var(--primary); }
+.btn.success { background: var(--success); }
+.btn.danger { background: var(--danger); }
+
+/* --- FAB Button --- */
+#fab-btn {
+    position: absolute;
+    bottom: 100px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    border: none;
+    font-size: 24px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    z-index: 1000;
+    cursor: pointer;
+}
+
+/* --- Audit Modal (Messenger Style) --- */
+#audit-modal {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60vh;
+    background: white;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    box-shadow: 0 -5px 25px rgba(0,0,0,0.2);
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+}
+#audit-modal.hidden {
+    display: none;
+}
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border);
+}
+.modal-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow-y: auto;
+}
+.modal-body input {
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 16px;
+}
